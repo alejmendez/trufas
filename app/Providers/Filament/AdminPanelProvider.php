@@ -19,6 +19,8 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 use Njxqlus\FilamentProgressbar\FilamentProgressbarPlugin;
+use Althinect\FilamentSpatieRolesPermissions\FilamentSpatieRolesPermissionsPlugin;
+
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -56,6 +58,7 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->plugin(FilamentProgressbarPlugin::make()->color('#29b'));;
+            ->plugin(FilamentProgressbarPlugin::make()->color('#29b'))
+            ->plugin(FilamentSpatieRolesPermissionsPlugin::make());
     }
 }
