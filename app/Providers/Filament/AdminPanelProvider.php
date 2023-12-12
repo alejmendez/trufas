@@ -17,6 +17,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Support\Enums\MaxWidth;
 
 use Njxqlus\FilamentProgressbar\FilamentProgressbarPlugin;
 use Althinect\FilamentSpatieRolesPermissions\FilamentSpatieRolesPermissionsPlugin;
@@ -58,6 +59,7 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
+            ->maxContentWidth(MaxWidth::Full)
             ->plugin(FilamentProgressbarPlugin::make()->color('#29b'))
             ->plugin(FilamentSpatieRolesPermissionsPlugin::make());
     }
