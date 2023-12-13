@@ -7,9 +7,14 @@ use Filament\Forms\Form;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\FileUpload;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Forms\Set;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use App\Models\User;
@@ -31,29 +36,85 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                TextInput::make('email')
-                    ->required()
-                    ->unique(ignoreRecord: true)
-                    ->maxLength(255),
-                TextInput::make('password')
-                    ->required()
-                    ->password()
-                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                    ->visible(fn ($livewire) => $livewire instanceof CreateUser)
-                    ->rule(Password::default()),
-                DateTimePicker::make('email_verified_at'),
-                Select::make('roles')
-                    ->multiple()
-                    ->relationship('roles', 'name'),
-                TextInput::make('password')
-                    ->password()
-                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                    ->dehydrated(fn ($state) => filled($state))
-                    ->required(fn (Page $livewire) => ($livewire instanceof CreateUser))
-                    ->maxLength(255),
+                Section::make(__('user.sections.principal'))
+                    ->schema([
+                        Grid::make()
+                            ->schema([
+                                FileUpload::make('avatar')
+                                    ->label(__('user.form.avatar.label'))
+                                    ->image()
+                                    ->avatar()
+                                    ->imageEditor()
+                                    ->circleCropper()
+                                    // ->directory('avatars')
+                                    ->columnSpan(2),
+                            ]),
+                        Grid::make()
+                            ->schema([
+                                TextInput::make('dni')
+                                    ->label(__('user.form.dni.label'))
+                                    ->placeholder(__('user.form.dni.placeholder'))
+                                    ->mask('99.999.999-*')
+                                    ->regex('/^\d{1,2}\.\d{3}\.\d{3}-[0-9kK]$/')
+                                    ->live()
+                                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('dni', Str::upper($state)))
+                                    ->required()
+                                    ->unique(ignoreRecord: true)
+                                    ->maxLength(255),
+                                TextInput::make('name')
+                                    ->label(__('user.form.name.label'))
+                                    ->placeholder(__('user.form.name.placeholder'))
+                                    ->required()
+                                    ->maxLength(255),
+                                TextInput::make('last_name')
+                                    ->label(__('user.form.last_name.label'))
+                                    ->placeholder(__('user.form.last_name.placeholder'))
+                                    ->required()
+                                    ->maxLength(255),
+                                TextInput::make('email')
+                                    ->label(__('user.form.email.label'))
+                                    ->placeholder(__('user.form.email.placeholder'))
+                                    ->required()
+                                    ->unique(ignoreRecord: true)
+                                    ->maxLength(255),
+                                TextInput::make('phone')
+                                    ->label(__('user.form.phone.label'))
+                                    ->placeholder(__('user.form.phone.placeholder'))
+                                    ->tel()
+                                    ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/')
+                                    ->required()
+                                    ->maxLength(255),
+                                // DateTimePicker::make('email_verified_at'),
+                            ])
+                            ->columns(2),
+                    ]),
+                    Section::make(__('user.sections.login'))
+                        ->schema([
+                            TextInput::make('email')
+                                ->label(__('user.form.email.label'))
+                                ->placeholder(__('user.form.email.placeholder'))
+                                ->required()
+                                ->unique(ignoreRecord: true)
+                                ->maxLength(255),
+                            TextInput::make('password')
+                                ->label(__('user.form.password.label'))
+                                ->placeholder(__('user.form.password.placeholder'))
+                                ->password()
+                                ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                                ->dehydrated(fn ($state) => filled($state))
+                                ->required(fn (Page $livewire) => ($livewire instanceof CreateUser))
+                                ->maxLength(255),
+                        ])
+                        ->hiddenOn('create'),
+                    Section::make(__('user.sections.roles'))
+                        ->schema([
+                            Select::make('roles')
+                                ->label(__('user.form.roles.label'))
+                                ->placeholder(__('user.form.roles.placeholder'))
+                                ->native(false)
+                                ->relationship('roles', 'name'),
+                        ])
+                        ->columns(2)
             ]);
     }
 
@@ -62,12 +123,32 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label(__('user.table.name'))
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('dni')
+                    ->label(__('user.table.dni'))
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('phone')
+                    ->label(__('user.table.phone'))
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('roles.name')
+                    ->label(__('user.table.roles'))
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'Administrador' => 'info',
+                        'Técnico' => 'success',
+                        'Agricultor' => 'gray',
+                        'Super Admin' => 'info',
+                    })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
+                    ->label(__('user.table.email'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email_verified_at')
+                    ->label(__('user.table.email_verified_at'))
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -81,10 +162,11 @@ class UserResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                // Tables\Actions\ViewAction::make()->label(''),
+                Tables\Actions\EditAction::make()->label(''),
+                Tables\Actions\DeleteAction::make()->label(''),
             ])
+            ->actionsColumnLabel(__('general.actions.column.label'))
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
@@ -110,5 +192,25 @@ class UserResource extends Resource
             'view' => Pages\ViewUser::route('/{record}'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('navigation.groups.administration');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('user.navigation_label');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('user.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('user.plural_label');
     }
 }

@@ -10,9 +10,13 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
+use Filament\Models\Contracts\HasName;
+use Illuminate\Support\Facades\Storage;
+
 use Filament\Panel;
 
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable implements FilamentUser, HasAvatar, HasName
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
@@ -25,6 +29,10 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
+        'dni',
+        'avatar',
+        'last_name',
+        'phone',
     ];
 
     /**
@@ -51,5 +59,15 @@ class User extends Authenticatable implements FilamentUser
     {
         return true;
         // return $this->hasVerifiedEmail();
+    }
+
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return Storage::url($this->avatar);
+    }
+
+    public function getFilamentName(): string
+    {
+        return "{$this->name} {$this->last_name}";
     }
 }

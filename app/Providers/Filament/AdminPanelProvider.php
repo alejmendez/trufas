@@ -18,6 +18,7 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Support\Enums\MaxWidth;
+use App\Filament\Pages\Auth\EditProfile;
 
 use Njxqlus\FilamentProgressbar\FilamentProgressbarPlugin;
 use Althinect\FilamentSpatieRolesPermissions\FilamentSpatieRolesPermissionsPlugin;
@@ -32,6 +33,9 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->passwordReset()
+            //->emailVerification()
+            ->profile(EditProfile::class)
             ->colors([
                 'primary' => Color::Amber,
             ])

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class fields extends Model
+class Fields extends Model
 {
     use HasFactory;
 
@@ -13,5 +13,11 @@ class fields extends Model
         'name',
         'location',
         'size',
+        'blueprint',
     ];
+
+    protected $casts = [
+        'blueprint' => 'array',
+    ];
+
 }

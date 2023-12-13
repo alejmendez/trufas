@@ -23,6 +23,11 @@ return [
             'label' => 'Superficie del campo',
             'placeholder' => '123 m²',
         ],
-        'count_tree' => 'Cantidad de arboles',
+        'blueprint' => [
+            'label' => 'Planos',
+        ],
+        'count_tree' => [
+            'label' => 'Cantidad de arboles',
+        ],
     ]
 ];

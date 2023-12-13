@@ -35,6 +35,10 @@ class FieldsResource extends Resource
                     ->label(__('field.form.size.label'))
                     ->placeholder(__('field.form.size.placeholder'))
                     ->required(),
+                Forms\Components\FileUpload::make('blueprint')
+                    ->label(__('field.form.blueprint.label'))
+                    ->multiple()
+                    ->columnSpan(2)
             ]);
     }
 
