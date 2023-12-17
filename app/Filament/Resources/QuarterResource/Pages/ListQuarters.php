@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\HarvestsResource\Pages;
+namespace App\Filament\Resources\QuarterResource\Pages;
 
-use App\Filament\Resources\HarvestsResource;
+use App\Filament\Resources\QuarterResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListHarvests extends ListRecords
+class ListQuarters extends ListRecords
 {
-    protected static string $resource = HarvestsResource::class;
+    protected static string $resource = QuarterResource::class;
 
     protected function getHeaderActions(): array
     {

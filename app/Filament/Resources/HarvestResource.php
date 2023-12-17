@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\HarvestsResource\Pages;
-use App\Filament\Resources\HarvestsResource\RelationManagers;
-use App\Models\Harvests;
+use App\Filament\Resources\HarvestResource\Pages;
+use App\Filament\Resources\HarvestResource\RelationManagers;
+use App\Models\Harvest;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,9 +13,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class HarvestsResource extends Resource
+class HarvestResource extends Resource
 {
-    protected static ?string $model = Harvests::class;
+    protected static ?string $model = Harvest::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -57,8 +57,8 @@ class HarvestsResource extends Resource
     {
         return [
             'index' => Pages\ListHarvests::route('/'),
-            'create' => Pages\CreateHarvests::route('/create'),
-            'edit' => Pages\EditHarvests::route('/{record}/edit'),
+            'create' => Pages\CreateHarvest::route('/create'),
+            'edit' => Pages\EditHarvest::route('/{record}/edit'),
         ];
     }
 }

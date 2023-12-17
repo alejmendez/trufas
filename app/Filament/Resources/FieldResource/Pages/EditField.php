@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\QuartersResource\Pages;
+namespace App\Filament\Resources\FieldResource\Pages;
 
-use App\Filament\Resources\QuartersResource;
+use App\Filament\Resources\FieldResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditQuarters extends EditRecord
+class EditField extends EditRecord
 {
-    protected static string $resource = QuartersResource::class;
+    protected static string $resource = FieldResource::class;
 
     protected function getHeaderActions(): array
     {

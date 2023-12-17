@@ -123,8 +123,8 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->label(__('user.table.name'))
+                Tables\Columns\TextColumn::make('full_name')
+                    ->label(__('user.table.full_name'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('dni')
                     ->label(__('user.table.dni'))

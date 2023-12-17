@@ -4,6 +4,10 @@ return [
     'label' => 'Campo',
     'plural_label' => 'Campos',
     'navigation_label' => 'Campos',
+    'sections' => [
+        'principal' => 'Detalles del campo',
+        'blueprint' => 'Planos',
+    ],
     'table' => [
         'name' => 'Nombre',
         'location' => 'Ubicación',
@@ -26,7 +30,7 @@ return [
         'blueprint' => [
             'label' => 'Planos',
         ],
-        'count_tree' => [
+        'count_plants' => [
             'label' => 'Cantidad de arboles',
         ],
     ]

@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('quarters', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('area');
+            $table->date('planned_at');
+            $table->string('blueprint');
+            $table->foreignId('field_id')->constrained();
             $table->timestamps();
         });
     }

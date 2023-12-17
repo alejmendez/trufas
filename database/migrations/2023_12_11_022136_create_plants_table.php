@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('plants', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('type');
+            $table->integer('age');
+            $table->string('location');
+            $table->string('location_xy');
+            $table->date('planned_at');
+            $table->string('manager');
+            $table->string('photos');
+            $table->string('documents');
+            $table->foreignId('quarter_id')->constrained();
             $table->timestamps();
         });
     }

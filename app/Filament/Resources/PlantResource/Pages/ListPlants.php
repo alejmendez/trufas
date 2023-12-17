@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\FieldsResource\Pages;
+namespace App\Filament\Resources\PlantResource\Pages;
 
-use App\Filament\Resources\FieldsResource;
+use App\Filament\Resources\PlantResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListFields extends ListRecords
+class ListPlants extends ListRecords
 {
-    protected static string $resource = FieldsResource::class;
+    protected static string $resource = PlantResource::class;
 
     protected function getHeaderActions(): array
     {

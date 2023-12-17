@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\FieldsResource\Pages;
-use App\Filament\Resources\FieldsResource\RelationManagers;
-use App\Models\Fields;
+use App\Filament\Resources\FieldResource\Pages;
+use App\Filament\Resources\FieldResource\RelationManagers;
+use App\Models\Field;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,9 +13,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class FieldsResource extends Resource
+class FieldResource extends Resource
 {
-    protected static ?string $model = Fields::class;
+    protected static ?string $model = Field::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-home-modern';
 
@@ -23,22 +23,33 @@ class FieldsResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label(__('field.form.name.label'))
-                    ->placeholder(__('field.form.name.placeholder'))
-                    ->required(),
-                Forms\Components\TextInput::make('location')
-                    ->label(__('field.form.location.label'))
-                    ->placeholder(__('field.form.location.placeholder'))
-                    ->required(),
-                Forms\Components\TextInput::make('size')
-                    ->label(__('field.form.size.label'))
-                    ->placeholder(__('field.form.size.placeholder'))
-                    ->required(),
-                Forms\Components\FileUpload::make('blueprint')
-                    ->label(__('field.form.blueprint.label'))
-                    ->multiple()
-                    ->columnSpan(2)
+                Forms\Components\Section::make(__('field.sections.principal'))
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->label(__('field.form.name.label'))
+                            ->placeholder(__('field.form.name.placeholder'))
+                            ->required(),
+                        Forms\Components\TextInput::make('location')
+                            ->label(__('field.form.location.label'))
+                            ->placeholder(__('field.form.location.placeholder'))
+                            ->required(),
+                        Forms\Components\TextInput::make('size')
+                            ->label(__('field.form.size.label'))
+                            ->placeholder(__('field.form.size.placeholder'))
+                            ->required(),
+                        Forms\Components\TextInput::make('count_plants')
+                            ->label(__('field.form.count_plants.label'))
+                            ->hiddenOn('create')
+                            ->disabled(),
+                    ])
+                    ->columns(2),
+                Forms\Components\Section::make(__('field.sections.blueprint'))
+                    ->schema([
+                        Forms\Components\FileUpload::make('blueprint')
+                            ->label(__('field.form.blueprint.label'))
+                            ->multiple()
+                            ->columnSpan(2)
+                    ]),
             ]);
     }
 
@@ -88,8 +99,8 @@ class FieldsResource extends Resource
     {
         return [
             'index' => Pages\ListFields::route('/'),
-            'create' => Pages\CreateFields::route('/create'),
-            'edit' => Pages\EditFields::route('/{record}/edit'),
+            'create' => Pages\CreateField::route('/create'),
+            'edit' => Pages\EditField::route('/{record}/edit'),
         ];
     }
 

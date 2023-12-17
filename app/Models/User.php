@@ -66,6 +66,11 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasName
         return Storage::url($this->avatar);
     }
 
+    public function getFullNameAttribute(): string
+    {
+        return "{$this->name} {$this->last_name}";
+    }
+
     public function getFilamentName(): string
     {
         return "{$this->name} {$this->last_name}";

@@ -11,9 +11,8 @@ return [
     ],
     'table' => [
         'dni'=> 'RUT/ ID',
-        'name' => 'Nombre',
-        'last_name' => 'Apellidos',
-        'email' => 'Correo electrónico',
+        'full_name' => 'Nombre',
+        'email' => 'Correo',
         'phone' => 'Teléfono',
         'email_verified_at' => 'Correo verificado el',
         'password' => 'Contraseña',
