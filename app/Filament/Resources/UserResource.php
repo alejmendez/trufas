@@ -56,7 +56,7 @@ class UserResource extends Resource
                                     ->placeholder(__('user.form.dni.placeholder'))
                                     ->mask('99.999.999-*')
                                     ->regex('/^\d{1,2}\.\d{3}\.\d{3}-[0-9kK]$/')
-                                    ->live()
+                                    ->live(onBlur: true)
                                     ->afterStateUpdated(fn (Set $set, ?string $state) => $set('dni', Str::upper($state)))
                                     ->required()
                                     ->unique(ignoreRecord: true)
@@ -112,6 +112,7 @@ class UserResource extends Resource
                                 ->label(__('user.form.roles.label'))
                                 ->placeholder(__('user.form.roles.placeholder'))
                                 ->native(false)
+                                ->required()
                                 ->relationship('roles', 'name'),
                         ])
                         ->columns(2)
@@ -163,8 +164,8 @@ class UserResource extends Resource
             ])
             ->actions([
                 // Tables\Actions\ViewAction::make()->label(''),
-                Tables\Actions\EditAction::make()->label(''),
-                Tables\Actions\DeleteAction::make()->label(''),
+                Tables\Actions\EditAction::make()->label('')->color('#6C757D'),
+                Tables\Actions\DeleteAction::make()->label('')->color('#6C757D'),
             ])
             ->actionsColumnLabel(__('general.actions.column.label'))
             ->bulkActions([
