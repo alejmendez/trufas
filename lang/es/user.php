@@ -50,7 +50,7 @@ return [
             'placeholder' => 'Seleccione',
         ],
         'avatar' => [
-            'label' => 'Seleccione un imagen',
+            'label' => 'Seleccione una imagen',
         ],
     ]
 ];
