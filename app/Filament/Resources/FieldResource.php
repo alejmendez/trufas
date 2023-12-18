@@ -17,7 +17,7 @@ class FieldResource extends Resource
 {
     protected static ?string $model = Field::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-home-modern';
+    protected static ?string $navigationIcon = 'fas-house';
 
     public static function form(Form $form): Form
     {
@@ -48,7 +48,6 @@ class FieldResource extends Resource
                         Forms\Components\FileUpload::make('blueprint')
                             ->label(__('field.form.blueprint.label'))
                             ->multiple()
-                            ->columnSpan(2)
                     ]),
             ]);
     }
@@ -79,7 +78,9 @@ class FieldResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\ViewAction::make()->label(''),
+                Tables\Actions\EditAction::make()->label('')->color('#6C757D'),
+                Tables\Actions\DeleteAction::make()->label('')->color('#6C757D'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -3,13 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
+use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\FileUpload;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -24,7 +19,7 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationIcon = 'fas-users';
     protected static ?string $navigationGroup = 'User Management';
 
     public static function getNavigationBadge(): ?string
@@ -36,11 +31,11 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Section::make(__('user.sections.principal'))
+                Forms\Components\Section::make(__('user.sections.principal'))
                     ->schema([
-                        Grid::make()
+                        Forms\Components\Grid::make()
                             ->schema([
-                                FileUpload::make('avatar')
+                                Forms\Components\FileUpload::make('avatar')
                                     ->label(__('user.form.avatar.label'))
                                     ->image()
                                     ->avatar()
@@ -49,9 +44,9 @@ class UserResource extends Resource
                                     // ->directory('avatars')
                                     ->columnSpan(2),
                             ]),
-                        Grid::make()
+                        Forms\Components\Grid::make()
                             ->schema([
-                                TextInput::make('dni')
+                                Forms\Components\TextInput::make('dni')
                                     ->label(__('user.form.dni.label'))
                                     ->placeholder(__('user.form.dni.placeholder'))
                                     ->mask('99.999.999-*')
@@ -61,23 +56,23 @@ class UserResource extends Resource
                                     ->required()
                                     ->unique(ignoreRecord: true)
                                     ->maxLength(255),
-                                TextInput::make('name')
+                                Forms\Components\TextInput::make('name')
                                     ->label(__('user.form.name.label'))
                                     ->placeholder(__('user.form.name.placeholder'))
                                     ->required()
                                     ->maxLength(255),
-                                TextInput::make('last_name')
+                                Forms\Components\TextInput::make('last_name')
                                     ->label(__('user.form.last_name.label'))
                                     ->placeholder(__('user.form.last_name.placeholder'))
                                     ->required()
                                     ->maxLength(255),
-                                TextInput::make('email')
+                                Forms\Components\TextInput::make('email')
                                     ->label(__('user.form.email.label'))
                                     ->placeholder(__('user.form.email.placeholder'))
                                     ->required()
                                     ->unique(ignoreRecord: true)
                                     ->maxLength(255),
-                                TextInput::make('phone')
+                                Forms\Components\TextInput::make('phone')
                                     ->label(__('user.form.phone.label'))
                                     ->placeholder(__('user.form.phone.placeholder'))
                                     ->tel()
@@ -88,15 +83,15 @@ class UserResource extends Resource
                             ])
                             ->columns(2),
                     ]),
-                    Section::make(__('user.sections.login'))
+                    Forms\Components\Section::make(__('user.sections.login'))
                         ->schema([
-                            TextInput::make('email')
+                            Forms\Components\TextInput::make('email')
                                 ->label(__('user.form.email.label'))
                                 ->placeholder(__('user.form.email.placeholder'))
                                 ->required()
                                 ->unique(ignoreRecord: true)
                                 ->maxLength(255),
-                            TextInput::make('password')
+                            Forms\Components\TextInput::make('password')
                                 ->label(__('user.form.password.label'))
                                 ->placeholder(__('user.form.password.placeholder'))
                                 ->password()
@@ -106,9 +101,9 @@ class UserResource extends Resource
                                 ->maxLength(255),
                         ])
                         ->hiddenOn('create'),
-                    Section::make(__('user.sections.roles'))
+                    Forms\Components\Section::make(__('user.sections.roles'))
                         ->schema([
-                            Select::make('roles')
+                            Forms\Components\Select::make('roles')
                                 ->label(__('user.form.roles.label'))
                                 ->placeholder(__('user.form.roles.placeholder'))
                                 ->native(false)
