@@ -8,11 +8,24 @@ return [
         'principal' => 'Detalles del campo',
         'blueprint' => 'Planos',
     ],
+    'tabs' => [
+        'card' => 'Ficha',
+        'activity' => 'Actividad',
+        'statistics' => 'Estadísticas',
+    ],
+    'view' => [
+        'name' => 'Campo: ',
+        'location' => 'Ubicación',
+        'size' => 'Superficie del campo',
+        'count_plants' => 'Cantidad de arboles',
+        'count_quarters' => 'Cantidad de Cuarteles',
+        'blueprint' => ''
+    ],
     'table' => [
         'name' => 'Nombre',
         'location' => 'Ubicación',
         'size' => 'Superficie',
-        'count_tree' => 'Cantidad de arboles',
+        'count_plants' => 'Cantidad de arboles',
     ],
     'form' => [
         'name' => [

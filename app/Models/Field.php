@@ -19,10 +19,6 @@ class Field extends Model
         'blueprint',
     ];
 
-    protected $casts = [
-        'blueprint' => 'array',
-    ];
-
     public function quarters(): HasMany
     {
         return $this->hasMany(Quarter::class);
@@ -36,5 +32,10 @@ class Field extends Model
     public function getCountPlantsAttribute(): int
     {
         return $this->plants->count();
+    }
+
+    public function getCountQuartersAttribute(): int
+    {
+        return $this->quarters->count();
     }
 }

@@ -30,6 +30,11 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
+            ->icons([
+                'actions::edit-action' => 'fas-pencil',
+                'actions::delete-action' => 'fas-trash',
+                'actions::view-action' => 'fas-eye',
+            ])
             ->brandName(__('general.panels.admin.brand_name'))
             ->id('admin')
             ->path('admin')

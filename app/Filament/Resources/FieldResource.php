@@ -10,6 +10,11 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Infolists;
+use Filament\Infolists\Infolist;
+use Filament\Infolists\Components\Tabs;
+use Filament\Infolists\Components\Grid;
+
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -37,17 +42,16 @@ class FieldResource extends Resource
                             ->label(__('field.form.size.label'))
                             ->placeholder(__('field.form.size.placeholder'))
                             ->required(),
-                        Forms\Components\TextInput::make('count_plants')
+                        Forms\Components\Placeholder::make('count_plants')
                             ->label(__('field.form.count_plants.label'))
                             ->hiddenOn('create')
-                            ->disabled(),
+                            ->content(fn (Field $record): string => $record->count_plants),
                     ])
                     ->columns(2),
                 Forms\Components\Section::make(__('field.sections.blueprint'))
                     ->schema([
                         Forms\Components\FileUpload::make('blueprint')
                             ->label(__('field.form.blueprint.label'))
-                            ->multiple()
                     ]),
             ]);
     }
@@ -78,7 +82,7 @@ class FieldResource extends Resource
                 //
             ])
             ->actions([
-                // Tables\Actions\ViewAction::make()->label(''),
+                Tables\Actions\ViewAction::make()->label('')->color('#6C757D'),
                 Tables\Actions\EditAction::make()->label('')->color('#6C757D'),
                 Tables\Actions\DeleteAction::make()->label('')->color('#6C757D'),
             ])
@@ -87,6 +91,56 @@ class FieldResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Tabs::make('Tabs')
+                    ->tabs([
+                        Tabs\Tab::make(__('field.tabs.card'))
+                            ->schema(static::getTabCard())
+                            ->columns(2),
+                        Tabs\Tab::make(__('field.tabs.activity'))
+                            ->schema([
+                                // ...
+                            ]),
+                        Tabs\Tab::make(__('field.tabs.statistics'))
+                            ->schema([
+                                // ...
+                            ]),
+                    ])
+            ])
+            ->columns(1);
+    }
+
+    public static function getTabCard(): array
+    {
+        return [
+            Infolists\Components\TextEntry::make('name')
+                ->prefix(__('field.view.name'))
+                ->label(''),
+            Grid::make()
+                ->schema([
+                    Infolists\Components\ImageEntry::make('blueprint')
+                        ->label(__('field.view.blueprint'))
+                        ->height('100%')
+                        ->width('100%'),
+                    Grid::make(1)
+                        ->schema([
+                            Infolists\Components\TextEntry::make('location')
+                                ->label(__('field.view.location')),
+                            Infolists\Components\TextEntry::make('size')
+                                ->label(__('field.view.size')),
+                            Infolists\Components\TextEntry::make('count_plants')
+                                ->label(__('field.view.count_plants')),
+                            Infolists\Components\TextEntry::make('count_quarters')
+                                ->label(__('field.view.count_quarters')),
+                        ])
+                        ->columnSpan(1),
+                ]),
+        ];
     }
 
     public static function getRelations(): array
@@ -100,6 +154,7 @@ class FieldResource extends Resource
     {
         return [
             'index' => Pages\ListFields::route('/'),
+            'view' => Pages\ViewField::route('/{record}/view'),
             'create' => Pages\CreateField::route('/create'),
             'edit' => Pages\EditField::route('/{record}/edit'),
         ];
