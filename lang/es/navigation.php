@@ -2,6 +2,6 @@
 
 return [
     'groups' => [
-        'administration' => 'Administración'
+        'administration' => 'Configuraciones'
     ]
 ];

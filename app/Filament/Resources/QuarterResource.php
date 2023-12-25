@@ -18,6 +18,7 @@ class QuarterResource extends Resource
     protected static ?string $model = Quarter::class;
 
     protected static ?string $navigationIcon = 'fas-tent';
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {

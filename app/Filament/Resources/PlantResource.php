@@ -18,6 +18,7 @@ class PlantResource extends Resource
     protected static ?string $model = Plant::class;
 
     protected static ?string $navigationIcon = 'fas-tree';
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
