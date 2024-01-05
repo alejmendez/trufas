@@ -53,6 +53,7 @@ class QuarterResource extends Resource
                         Forms\Components\FileUpload::make('blueprint')
                             ->label(__('quarter.form.blueprint.label'))
                             ->multiple()
+                            ->optimize('webp')
                             ->columnSpan(2)
                     ]),
             ]);

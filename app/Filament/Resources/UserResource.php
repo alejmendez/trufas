@@ -40,8 +40,8 @@ class UserResource extends Resource
                                     ->image()
                                     ->avatar()
                                     ->imageEditor()
+                                    ->optimize('webp')
                                     ->circleCropper()
-                                    // ->directory('avatars')
                                     ->columnSpan(2),
                             ]),
                         Forms\Components\Grid::make()

@@ -52,6 +52,7 @@ class FieldResource extends Resource
                 Forms\Components\Section::make(__('field.sections.blueprint'))
                     ->schema([
                         Forms\Components\FileUpload::make('blueprint')
+                            ->optimize('webp')
                             ->label(__('field.form.blueprint.label'))
                     ]),
             ]);

@@ -65,9 +65,11 @@ class PlantResource extends Resource
                     ->schema([
                         Forms\Components\FileUpload::make('photos')
                             ->label(__('plant.form.photos.label'))
+                            ->optimize('webp')
                             ->multiple(),
                         Forms\Components\FileUpload::make('documents')
                             ->label(__('plant.form.documents.label'))
+                            ->optimize('webp')
                             ->multiple()
                     ]),
             ]);
