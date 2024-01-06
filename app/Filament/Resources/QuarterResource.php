@@ -101,7 +101,7 @@ class QuarterResource extends Resource
                 //
             ])
             ->actions([
-                // Tables\Actions\ViewAction::make()->label(''),
+                Tables\Actions\ViewAction::make()->label('')->color('#6C757D'),
                 Tables\Actions\EditAction::make()->label('')->color('#6C757D'),
                 Tables\Actions\DeleteAction::make()->label('')->color('#6C757D'),
             ])

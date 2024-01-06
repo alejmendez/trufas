@@ -129,7 +129,9 @@ class PlantResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()->label('')->color('#6C757D'),
+                Tables\Actions\EditAction::make()->label('')->color('#6C757D'),
+                Tables\Actions\DeleteAction::make()->label('')->color('#6C757D'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
