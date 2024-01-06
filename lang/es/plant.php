@@ -8,6 +8,13 @@ return [
         'principal' => 'Detalles de la planta',
         'documents' => 'Documentos'
     ],
+    'tabs' => [
+        'card' => 'Ficha',
+        'variables' => 'Variables',
+        'history' => 'Historial',
+        'harvest' => 'Cosecha',
+        'statistics' => 'Estadísticas',
+    ],
     'table' => [
         'name' => 'Nombre',
         'type' => 'Tipo de planta',

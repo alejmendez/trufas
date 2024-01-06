@@ -14,6 +14,8 @@ use Filament\Infolists;
 use Filament\Infolists\Infolist;
 use Filament\Infolists\Components\Tabs;
 use Filament\Infolists\Components\Grid;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -51,8 +53,12 @@ class FieldResource extends Resource
                     ->columns(2),
                 Forms\Components\Section::make(__('field.sections.blueprint'))
                     ->schema([
-                        Forms\Components\FileUpload::make('blueprint')
-                            ->optimize('webp')
+                        SpatieMediaLibraryFileUpload::make('blueprint')
+                            //->optimize('webp')
+                            ->multiple()
+                            ->reorderable()
+                            ->image()
+                            ->imageEditor()
                             ->label(__('field.form.blueprint.label'))
                     ]),
             ]);
@@ -104,14 +110,12 @@ class FieldResource extends Resource
                         Tabs\Tab::make(__('field.tabs.card'))
                             ->schema(static::getTabCard())
                             ->columns(2),
-                        Tabs\Tab::make(__('field.tabs.activity'))
-                            ->schema([
-                                // ...
-                            ]),
+                        Tabs\Tab::make(__('field.tabs.history'))
+                            ->schema(static::getTaHistory()),
+                        Tabs\Tab::make(__('field.tabs.harvest'))
+                            ->schema(static::getTabHarvest()),
                         Tabs\Tab::make(__('field.tabs.statistics'))
-                            ->schema([
-                                // ...
-                            ]),
+                            ->schema(static::getTabStatistics()),
                     ])
             ])
             ->columns(1);
@@ -125,7 +129,7 @@ class FieldResource extends Resource
                 ->label(''),
             Grid::make()
                 ->schema([
-                    Infolists\Components\ImageEntry::make('blueprint')
+                    SpatieMediaLibraryImageEntry::make('blueprint')
                         ->label(__('field.view.blueprint'))
                         ->height('100%')
                         ->width('100%'),
@@ -143,6 +147,21 @@ class FieldResource extends Resource
                         ->columnSpan(1),
                 ]),
         ];
+    }
+
+    public static function getTaHistory(): array
+    {
+        return [];
+    }
+
+    public static function getTabHarvest(): array
+    {
+        return [];
+    }
+
+    public static function getTabStatistics(): array
+    {
+        return [];
     }
 
     public static function getRelations(): array

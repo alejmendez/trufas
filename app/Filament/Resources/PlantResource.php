@@ -10,8 +10,15 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Infolists;
+use Filament\Infolists\Infolist;
+use Filament\Infolists\Components\Tabs;
+use Filament\Infolists\Components\Grid;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 
 class PlantResource extends Resource
 {
@@ -63,14 +70,20 @@ class PlantResource extends Resource
                     ->columns(2),
                 Forms\Components\Section::make(__('plant.sections.documents'))
                     ->schema([
-                        Forms\Components\FileUpload::make('photos')
-                            ->label(__('plant.form.photos.label'))
-                            ->optimize('webp')
-                            ->multiple(),
-                        Forms\Components\FileUpload::make('documents')
-                            ->label(__('plant.form.documents.label'))
-                            ->optimize('webp')
+                        SpatieMediaLibraryFileUpload::make('photos')
+                            //->optimize('webp')
                             ->multiple()
+                            ->reorderable()
+                            ->image()
+                            ->imageEditor()
+                            ->label(__('plant.form.photos.label')),
+                        SpatieMediaLibraryFileUpload::make('documents')
+                            //->optimize('webp')
+                            ->multiple()
+                            ->reorderable()
+                            ->image()
+                            ->imageEditor()
+                            ->label(__('plant.form.documents.label')),
                     ]),
             ]);
     }
@@ -80,28 +93,28 @@ class PlantResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label(__('quarter.table.name'))
+                    ->label(__('plant.table.name'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
-                    ->label(__('quarter.table.type'))
+                    ->label(__('plant.table.type'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('age')
-                    ->label(__('quarter.table.age'))
+                    ->label(__('plant.table.age'))
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('planned_at')
-                    ->label(__('quarter.table.planned_at'))
+                    ->label(__('plant.table.planned_at'))
                     ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('location')
-                    ->label(__('quarter.table.location'))
+                    ->label(__('plant.table.location'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('quarter.name')
-                    ->label(__('quarter.table.quarter_id'))
+                Tables\Columns\TextColumn::make('plant.name')
+                    ->label(__('plant.table.quarter_id'))
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('manager')
-                    ->label(__('quarter.table.manager'))
+                    ->label(__('plant.table.manager'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -125,6 +138,76 @@ class PlantResource extends Resource
             ]);
     }
 
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Tabs::make('Tabs')
+                    ->tabs([
+                        Tabs\Tab::make(__('plant.tabs.card'))
+                            ->schema(static::getTabCard())
+                            ->columns(2),
+                        Tabs\Tab::make(__('plant.tabs.variables'))
+                            ->schema(static::getTabVariables()),
+                        Tabs\Tab::make(__('plant.tabs.history'))
+                            ->schema(static::getTabHistory()),
+                        Tabs\Tab::make(__('plant.tabs.harvest'))
+                            ->schema(static::getTabHarvest()),
+                        Tabs\Tab::make(__('plant.tabs.statistics'))
+                            ->schema(static::getTabStatistics()),
+                    ])
+            ])
+            ->columns(1);
+    }
+
+    public static function getTabCard(): array
+    {
+        return [
+            Infolists\Components\TextEntry::make('name')
+                ->prefix(__('plant.view.name'))
+                ->label(''),
+            Grid::make()
+                ->schema([
+                    SpatieMediaLibraryImageEntry::make('documents')
+                        ->label(__('plant.view.documents'))
+                        ->height('100%')
+                        ->width('100%'),
+                    Grid::make(1)
+                        ->schema([
+                            Infolists\Components\TextEntry::make('location')
+                                ->label(__('plant.view.location')),
+                            Infolists\Components\TextEntry::make('size')
+                                ->label(__('plant.view.size')),
+                            Infolists\Components\TextEntry::make('count_plants')
+                                ->label(__('plant.view.count_plants')),
+                            Infolists\Components\TextEntry::make('count_quarters')
+                                ->label(__('plant.view.count_quarters')),
+                        ])
+                        ->columnSpan(1),
+                ]),
+        ];
+    }
+
+    public static function getTabVariables(): array
+    {
+        return [];
+    }
+
+    public static function getTabHistory(): array
+    {
+        return [];
+    }
+
+    public static function getTabHarvest(): array
+    {
+        return [];
+    }
+
+    public static function getTabStatistics(): array
+    {
+        return [];
+    }
+
     public static function getRelations(): array
     {
         return [
@@ -136,6 +219,7 @@ class PlantResource extends Resource
     {
         return [
             'index' => Pages\ListPlants::route('/'),
+            'view' => Pages\ViewPlant::route('/{record}/view'),
             'create' => Pages\CreatePlant::route('/create'),
             'edit' => Pages\EditPlant::route('/{record}/edit'),
         ];

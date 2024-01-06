@@ -40,7 +40,7 @@ class UserResource extends Resource
                                     ->image()
                                     ->avatar()
                                     ->imageEditor()
-                                    ->optimize('webp')
+                                    //->optimize('webp')
                                     ->circleCropper()
                                     ->columnSpan(2),
                             ]),

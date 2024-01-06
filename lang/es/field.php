@@ -10,7 +10,8 @@ return [
     ],
     'tabs' => [
         'card' => 'Ficha',
-        'activity' => 'Actividad',
+        'history' => 'Historial',
+        'harvest' => 'Cosecha',
         'statistics' => 'Estadísticas',
     ],
     'view' => [

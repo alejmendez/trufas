@@ -8,6 +8,12 @@ return [
         'principal' => 'Detalles del cuartel',
         'blueprint' => 'Planos'
     ],
+    'tabs' => [
+        'card' => 'Ficha',
+        'documentation' => 'Documentación',
+        'activity' => 'Actividad',
+        'statistics' => 'Estadísticas',
+    ],
     'table' => [
         'name' => 'Nombres',
         'field_id' => 'Campo asociado',

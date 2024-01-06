@@ -21,7 +21,7 @@ class EditProfile extends BaseEditProfile
                             ->label(__('user.form.avatar.label'))
                             ->image()
                             ->avatar()
-                            ->optimize('webp')
+                            //->optimize('webp')
                             ->imageEditor()
                             ->circleCropper()
                     ]),

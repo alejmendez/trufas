@@ -10,8 +10,15 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Infolists;
+use Filament\Infolists\Infolist;
+use Filament\Infolists\Components\Tabs;
+use Filament\Infolists\Components\Grid;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 
 class QuarterResource extends Resource
 {
@@ -50,11 +57,13 @@ class QuarterResource extends Resource
                     ->columns(2),
                 Forms\Components\Section::make(__('quarter.sections.blueprint'))
                     ->schema([
-                        Forms\Components\FileUpload::make('blueprint')
-                            ->label(__('quarter.form.blueprint.label'))
+                        SpatieMediaLibraryFileUpload::make('blueprint')
+                            //->optimize('webp')
                             ->multiple()
-                            ->optimize('webp')
-                            ->columnSpan(2)
+                            ->reorderable()
+                            ->image()
+                            ->imageEditor()
+                            ->label(__('quarter.form.blueprint.label')),
                     ]),
             ]);
     }
@@ -103,6 +112,46 @@ class QuarterResource extends Resource
             ]);
     }
 
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Tabs::make('Tabs')
+                    ->tabs([
+                        Tabs\Tab::make(__('quarter.tabs.card'))
+                            ->schema(static::getTabCard())
+                            ->columns(2),
+                        Tabs\Tab::make(__('quarter.tabs.documentation'))
+                            ->schema(static::getTabDocumentation()),
+                        Tabs\Tab::make(__('quarter.tabs.activity'))
+                            ->schema(static::getTabHarvest()),
+                        Tabs\Tab::make(__('quarter.tabs.statistics'))
+                            ->schema(static::getTabStatistics()),
+                    ])
+            ])
+            ->columns(1);
+    }
+
+    public static function getTabCard(): array
+    {
+        return [];
+    }
+
+    public static function getTabDocumentation(): array
+    {
+        return [];
+    }
+
+    public static function getTabHarvest(): array
+    {
+        return [];
+    }
+
+    public static function getTabStatistics(): array
+    {
+        return [];
+    }
+
     public static function getRelations(): array
     {
         return [
@@ -114,6 +163,7 @@ class QuarterResource extends Resource
     {
         return [
             'index' => Pages\ListQuarters::route('/'),
+            'view' => Pages\ViewQuarter::route('/{record}/view'),
             'create' => Pages\CreateQuarter::route('/create'),
             'edit' => Pages\EditQuarter::route('/{record}/edit'),
         ];
