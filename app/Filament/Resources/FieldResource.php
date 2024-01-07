@@ -24,7 +24,7 @@ class FieldResource extends Resource
 {
     protected static ?string $model = Field::class;
 
-    protected static ?string $navigationIcon = 'fas-house';
+    // protected static ?string $navigationIcon = 'fas-house';
     protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form

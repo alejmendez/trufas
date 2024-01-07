@@ -6,7 +6,7 @@ return [
     'navigation_label' => 'Plantas',
     'sections' => [
         'principal' => 'Detalles de la planta',
-        'documents' => 'Documentos'
+        'blueprint' => 'Planos'
     ],
     'tabs' => [
         'card' => 'Ficha',
@@ -14,6 +14,16 @@ return [
         'history' => 'Historial',
         'harvest' => 'Cosecha',
         'statistics' => 'Estadísticas',
+    ],
+    'view' => [
+        'name' => 'Planta: ',
+        'field_id' => 'Perteneciente al campo',
+        'quater_id' => 'Perteneciente al cuartel',
+        'type' => 'Tipo de planta',
+        'age' => 'Edad',
+        'planned_at' => 'Fecha de plantación',
+        'manager' => 'Responsable',
+        'location' => 'Ubicación',
     ],
     'table' => [
         'name' => 'Nombre',
@@ -33,8 +43,8 @@ return [
             'placeholder' => 'Nombre de la  planta',
         ],
         'type'=> [
-            'label' => 'Tipo de árbol',
-            'placeholder' => 'Tipo de árbol',
+            'label' => 'Tipo de planta',
+            'placeholder' => 'Tipo de planta',
         ],
         'age' => [
             'label' => 'Edad de la  planta',
@@ -56,11 +66,9 @@ return [
             'label' => 'Responsable de la  planta',
             'placeholder' => 'Responsable de la  planta',
         ],
-        'photos'=> [
-            'label' => 'Fotos',
+        'blueprint'=> [
+            'label' => 'Planos',
+            'placeholder' => 'Planos',
         ],
-        'documents'=> [
-            'label' => 'Documentos',
-        ]
     ]
 ];

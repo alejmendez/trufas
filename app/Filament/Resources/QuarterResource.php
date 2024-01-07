@@ -24,7 +24,7 @@ class QuarterResource extends Resource
 {
     protected static ?string $model = Quarter::class;
 
-    protected static ?string $navigationIcon = 'fas-tent';
+    // protected static ?string $navigationIcon = 'fas-tent';
     protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
@@ -134,7 +134,31 @@ class QuarterResource extends Resource
 
     public static function getTabCard(): array
     {
-        return [];
+        return [
+            Infolists\Components\TextEntry::make('name')
+                ->prefix(__('quarter.view.name'))
+                ->label(''),
+            Grid::make()
+                ->schema([
+                    SpatieMediaLibraryImageEntry::make('blueprint')
+                        ->label(__('quarter.view.blueprint'))
+                        ->height('100%')
+                        ->width('100%'),
+                    Grid::make(1)
+                        ->schema([
+                            Infolists\Components\TextEntry::make('field.name')
+                                ->label(__('quarter.view.field_id')),
+                            Infolists\Components\TextEntry::make('area')
+                                ->label(__('quarter.view.area')),
+                            Infolists\Components\TextEntry::make('count_plants')
+                                ->label(__('quarter.view.count_plants')),
+                            Infolists\Components\TextEntry::make('planned_at')
+                                ->label(__('quarter.view.planned_at'))
+                                ->dateTime(),
+                        ])
+                        ->columnSpan(1),
+                ]),
+        ];;
     }
 
     public static function getTabDocumentation(): array

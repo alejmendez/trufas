@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -21,15 +22,18 @@ class Plant extends Model implements HasMedia
         'location_xy',
         'planned_at',
         'manager',
-        'photos',
-        'documents',
+        'blueprint',
         'quarter_id',
     ];
 
     protected $casts = [
-        'photos' => 'array',
-        'documents' => 'array',
+        'blueprint' => 'array',
     ];
+
+    public function field()
+    {
+        return $this->quarter->field();
+    }
 
     public function quarter(): BelongsTo
     {

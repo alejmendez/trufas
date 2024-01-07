@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('area');
             $table->date('planned_at');
-            $table->string('blueprint');
+            // $table->string('blueprint');
             $table->foreignId('field_id')->constrained();
             $table->timestamps();
         });

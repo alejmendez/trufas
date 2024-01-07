@@ -24,7 +24,7 @@ class PlantResource extends Resource
 {
     protected static ?string $model = Plant::class;
 
-    protected static ?string $navigationIcon = 'fas-tree';
+    // protected static ?string $navigationIcon = 'fas-tree';
     protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
@@ -68,22 +68,15 @@ class PlantResource extends Resource
                             ->required(),
                     ])
                     ->columns(2),
-                Forms\Components\Section::make(__('plant.sections.documents'))
+                Forms\Components\Section::make(__('plant.sections.blueprint'))
                     ->schema([
-                        SpatieMediaLibraryFileUpload::make('photos')
+                        SpatieMediaLibraryFileUpload::make('blueprint')
                             //->optimize('webp')
                             ->multiple()
                             ->reorderable()
                             ->image()
                             ->imageEditor()
-                            ->label(__('plant.form.photos.label')),
-                        SpatieMediaLibraryFileUpload::make('documents')
-                            //->optimize('webp')
-                            ->multiple()
-                            ->reorderable()
-                            ->image()
-                            ->imageEditor()
-                            ->label(__('plant.form.documents.label')),
+                            ->label(__('plant.form.blueprint.label')),
                     ]),
             ]);
     }
@@ -176,14 +169,20 @@ class PlantResource extends Resource
                         ->width('100%'),
                     Grid::make(1)
                         ->schema([
+                            Infolists\Components\TextEntry::make('field.name')
+                                ->label(__('plant.view.field_id')),
+                            Infolists\Components\TextEntry::make('quarter.name')
+                                ->label(__('plant.view.quater_id')),
+                            Infolists\Components\TextEntry::make('type')
+                                ->label(__('plant.view.type')),
+                            Infolists\Components\TextEntry::make('age')
+                                ->label(__('plant.view.age')),
+                            Infolists\Components\TextEntry::make('planned_at')
+                                ->label(__('plant.view.planned_at')),
+                            Infolists\Components\TextEntry::make('manager')
+                                ->label(__('plant.view.manager')),
                             Infolists\Components\TextEntry::make('location')
                                 ->label(__('plant.view.location')),
-                            Infolists\Components\TextEntry::make('size')
-                                ->label(__('plant.view.size')),
-                            Infolists\Components\TextEntry::make('count_plants')
-                                ->label(__('plant.view.count_plants')),
-                            Infolists\Components\TextEntry::make('count_quarters')
-                                ->label(__('plant.view.count_quarters')),
                         ])
                         ->columnSpan(1),
                 ]),

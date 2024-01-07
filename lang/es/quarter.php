@@ -14,6 +14,14 @@ return [
         'activity' => 'Actividad',
         'statistics' => 'Estadísticas',
     ],
+    'view' => [
+        'name' => 'Cuartel: ',
+        'field_id' => 'Perteneciente al campo',
+        'area' => 'Superficie del cuartel',
+        'count_plants' => 'Cantidad de arboles',
+        'planned_at' => 'Fecha de plantación',
+        'blueprint' => '',
+    ],
     'table' => [
         'name' => 'Nombres',
         'field_id' => 'Campo asociado',

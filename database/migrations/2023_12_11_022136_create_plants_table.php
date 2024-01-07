@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('location_xy');
             $table->date('planned_at');
             $table->string('manager');
-            $table->string('photos');
-            $table->string('documents');
+            $table->string('code');
+            // $table->string('blueprint');
             $table->foreignId('quarter_id')->constrained();
             $table->timestamps();
         });
