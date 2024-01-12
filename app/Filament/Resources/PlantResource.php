@@ -72,6 +72,7 @@ class PlantResource extends Resource
                     ->schema([
                         SpatieMediaLibraryFileUpload::make('blueprint')
                             //->optimize('webp')
+                            ->directory('public/plants')
                             ->multiple()
                             ->reorderable()
                             ->image()

@@ -22,6 +22,7 @@ class EditProfile extends BaseEditProfile
                             ->image()
                             ->avatar()
                             //->optimize('webp')
+                            ->directory('public/avatars')
                             ->imageEditor()
                             ->circleCropper()
                     ]),

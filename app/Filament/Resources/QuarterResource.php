@@ -59,6 +59,7 @@ class QuarterResource extends Resource
                     ->schema([
                         SpatieMediaLibraryFileUpload::make('blueprint')
                             //->optimize('webp')
+                            ->directory('public/quarters')
                             ->multiple()
                             ->reorderable()
                             ->image()
