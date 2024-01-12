@@ -42,7 +42,6 @@ class EditProfile extends BaseEditProfile
                     ->placeholder(__('user.form.phone.placeholder'))
                     ->tel()
                     ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/')
-                    ->required()
                     ->maxLength(255),
                 $this->getPasswordFormComponent(),
                 $this->getPasswordConfirmationFormComponent(),

@@ -63,6 +63,10 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasName
 
     public function getFilamentAvatarUrl(): ?string
     {
+        if ($this->avatar == null) {
+            return '';
+        }
+
         return Storage::url($this->avatar);
     }
 
