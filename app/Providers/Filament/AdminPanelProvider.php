@@ -70,6 +70,7 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->maxContentWidth(MaxWidth::Full)
+            ->sidebarCollapsibleOnDesktop()
             // ->spa()
             ->plugin(FilamentProgressbarPlugin::make()->color('#29b'))
             ->plugin(FilamentSpatieRolesPermissionsPlugin::make());
