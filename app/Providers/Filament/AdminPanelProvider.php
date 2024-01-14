@@ -43,7 +43,7 @@ class AdminPanelProvider extends PanelProvider
             //->emailVerification()
             ->profile(EditProfile::class)
             ->colors([
-                'primary' => '#CC6844',
+                'primary' => '#212226',
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')

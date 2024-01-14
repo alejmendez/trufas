@@ -5,3 +5,12 @@
 label[for="data.dni"]{
     text-transform: uppercase;
 }
+
+.fi-form-actions {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.fi-simple-layout {
+    background-color: #CC6844;
+}
