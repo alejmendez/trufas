@@ -50,13 +50,7 @@ class UserResource extends Resource
                                 Forms\Components\TextInput::make('dni')
                                     ->label(__('user.form.dni.label'))
                                     ->placeholder(__('user.form.dni.placeholder'))
-                                    ->mask('99.999.999-*')
-                                    ->regex('/^\d{1,2}\.\d{3}\.\d{3}\-[0-9k]$/i')
-                                    ->live(onBlur: true)
-                                    ->afterStateUpdated(function (Set $set, ?string $state) {
-                                        $state = Str::upper($state);
-                                        return $set('dni', $state);
-                                    })
+                                    ->extraInputAttributes(['data-type' => 'dni'])
                                     ->required()
                                     ->unique(ignoreRecord: true)
                                     ->maxLength(12),
@@ -81,7 +75,7 @@ class UserResource extends Resource
                                     ->label(__('user.form.phone.label'))
                                     ->placeholder(__('user.form.phone.placeholder'))
                                     ->tel()
-                                    ->telRegex('/^\({0,1}\+*\({0,1}[0-9]{1,4}\){0,1}[-\s\.\/0-9]*$/')
+                                    ->extraInputAttributes(['data-type' => 'tel'])
                                     ->maxLength(255),
                                 // DateTimePicker::make('email_verified_at'),
                             ])
