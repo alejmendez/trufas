@@ -46,6 +46,7 @@
             <div class="w-full mb-5">
                 <img
                     src="{{ filled($limitedState[0]) ? $getImageUrl($limitedState[0]) : $defaultImageUrl }}"
+                    class="main-img"
                 />
             </div>
         @endif

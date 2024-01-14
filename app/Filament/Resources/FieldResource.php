@@ -57,7 +57,7 @@ class FieldResource extends Resource
                     ->schema([
                         SpatieMediaLibraryFileUpload::make('blueprint')
                             //->optimize('webp')
-                            ->collection('public/fields')
+                            ->directory('public/fields')
                             ->multiple()
                             ->reorderable()
                             ->image()
