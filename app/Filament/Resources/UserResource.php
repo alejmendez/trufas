@@ -76,7 +76,7 @@ class UserResource extends Resource
                                     ->placeholder(__('user.form.phone.placeholder'))
                                     ->tel()
                                     ->extraInputAttributes(['data-type' => 'tel'])
-                                    ->maxLength(255),
+                                    ->maxLength(18),
                                 // DateTimePicker::make('email_verified_at'),
                             ])
                             ->columns(2),
@@ -86,6 +86,7 @@ class UserResource extends Resource
                             Forms\Components\TextInput::make('email')
                                 ->label(__('user.form.email.label'))
                                 ->placeholder(__('user.form.email.placeholder'))
+                                ->email()
                                 ->required()
                                 ->unique(ignoreRecord: true)
                                 ->maxLength(255),

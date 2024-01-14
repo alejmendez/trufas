@@ -36,15 +36,18 @@ class FieldResource extends Resource
                         Forms\Components\TextInput::make('name')
                             ->label(__('field.form.name.label'))
                             ->placeholder(__('field.form.name.placeholder'))
-                            ->required(),
+                            ->required()
+                            ->maxLength(255),
                         Forms\Components\TextInput::make('location')
                             ->label(__('field.form.location.label'))
                             ->placeholder(__('field.form.location.placeholder'))
-                            ->required(),
+                            ->required()
+                            ->maxLength(255),
                         Forms\Components\TextInput::make('size')
                             ->label(__('field.form.size.label'))
                             ->placeholder(__('field.form.size.placeholder'))
-                            ->required(),
+                            ->required()
+                            ->maxLength(255),
                         Forms\Components\Placeholder::make('count_plants')
                             ->label(__('field.form.count_plants.label'))
                             ->hiddenOn('create')

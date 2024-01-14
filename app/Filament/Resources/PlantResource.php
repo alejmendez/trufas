@@ -40,24 +40,29 @@ class PlantResource extends Resource
                         Forms\Components\TextInput::make('name')
                             ->label(__('plant.form.name.label'))
                             ->placeholder(__('plant.form.name.placeholder'))
-                            ->required(),
+                            ->required()
+                            ->maxLength(255),
                         Forms\Components\TextInput::make('type')
                             ->label(__('plant.form.type.label'))
                             ->placeholder(__('plant.form.type.placeholder'))
-                            ->required(),
+                            ->required()
+                            ->maxLength(255),
                         Forms\Components\TextInput::make('age')
                             ->label(__('plant.form.age.label'))
                             ->placeholder(__('plant.form.age.placeholder'))
                             ->required()
+                            ->maxLength(255)
                             ->numeric(),
                         Forms\Components\TextInput::make('location')
                             ->label(__('plant.form.location.label'))
                             ->placeholder(__('plant.form.location.placeholder'))
-                            ->required(),
+                            ->required()
+                            ->maxLength(255),
                         Forms\Components\TextInput::make('location_xy')
                             ->label(__('plant.form.location_xy.label'))
                             ->placeholder(__('plant.form.location_xy.placeholder'))
-                            ->required(),
+                            ->required()
+                            ->maxLength(255),
                         Forms\Components\DatePicker::make('planned_at')
                             ->label(__('plant.form.planned_at.label'))
                             ->placeholder(__('plant.form.planned_at.placeholder'))
@@ -65,7 +70,8 @@ class PlantResource extends Resource
                         Forms\Components\TextInput::make('manager')
                             ->label(__('plant.form.manager.label'))
                             ->placeholder(__('plant.form.manager.placeholder'))
-                            ->required(),
+                            ->required()
+                            ->maxLength(255),
                     ])
                     ->columns(2),
                 Forms\Components\Section::make(__('plant.sections.blueprint'))

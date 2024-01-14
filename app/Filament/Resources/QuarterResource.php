@@ -40,11 +40,13 @@ class QuarterResource extends Resource
                         Forms\Components\TextInput::make('name')
                             ->label(__('quarter.form.name.label'))
                             ->placeholder(__('quarter.form.name.placeholder'))
-                            ->required(),
+                            ->required()
+                            ->maxLength(255),
                         Forms\Components\TextInput::make('area')
                             ->label(__('quarter.form.area.label'))
                             ->placeholder(__('quarter.form.area.placeholder'))
-                            ->required(),
+                            ->required()
+                            ->maxLength(255),
                         Forms\Components\TextInput::make('count_plants')
                             ->label(__('quarter.form.count_plants.label'))
                             ->hiddenOn('create')

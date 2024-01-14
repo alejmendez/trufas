@@ -36,13 +36,19 @@ class EditProfile extends BaseEditProfile
                     ->placeholder(__('user.form.last_name.placeholder'))
                     ->required()
                     ->maxLength(255),
-                $this->getEmailFormComponent(),
+                TextInput::make('email')
+                    ->label(__('user.form.email.label'))
+                    ->placeholder(__('user.form.email.placeholder'))
+                    ->email()
+                    ->required()
+                    ->unique(ignoreRecord: true)
+                    ->maxLength(255),
                 TextInput::make('phone')
                     ->label(__('user.form.phone.label'))
                     ->placeholder(__('user.form.phone.placeholder'))
                     ->tel()
-                    ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/')
-                    ->maxLength(255),
+                    ->extraInputAttributes(['data-type' => 'tel'])
+                    ->maxLength(18),
                 $this->getPasswordFormComponent(),
                 $this->getPasswordConfirmationFormComponent(),
             ]);
