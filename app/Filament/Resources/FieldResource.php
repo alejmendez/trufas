@@ -17,6 +17,8 @@ use Filament\Infolists\Components\Grid;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 
+use App\Infolists\Components\ViewImageGalleryEntry;
+
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -55,7 +57,7 @@ class FieldResource extends Resource
                     ->schema([
                         SpatieMediaLibraryFileUpload::make('blueprint')
                             //->optimize('webp')
-                            ->directory('public/fields')
+                            ->collection('public/fields')
                             ->multiple()
                             ->reorderable()
                             ->image()
@@ -130,10 +132,8 @@ class FieldResource extends Resource
                 ->label(''),
             Grid::make()
                 ->schema([
-                    SpatieMediaLibraryImageEntry::make('blueprint')
-                        ->label(__('field.view.blueprint'))
-                        ->height('100%')
-                        ->width('100%'),
+                    ViewImageGalleryEntry::make('blueprint')
+                        ->label(__('field.view.blueprint')),
                     Grid::make(1)
                         ->schema([
                             Infolists\Components\TextEntry::make('location')

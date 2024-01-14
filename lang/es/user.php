@@ -21,7 +21,7 @@ return [
     ],
     'form' => [
         'dni' => [
-            'label' => 'RUT/ ID',
+            'label' => 'rut/id',
             'placeholder' => 'Ingresa tu número de identificación',
         ],
         'name' => [
