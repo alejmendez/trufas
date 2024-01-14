@@ -14,11 +14,11 @@ use Filament\Infolists;
 use Filament\Infolists\Infolist;
 use Filament\Infolists\Components\Tabs;
 use Filament\Infolists\Components\Grid;
+
+use App\Infolists\Components\ViewImageGalleryEntry;
+
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 
 class QuarterResource extends Resource
 {
@@ -57,13 +57,12 @@ class QuarterResource extends Resource
                     ->columns(2),
                 Forms\Components\Section::make(__('quarter.sections.blueprint'))
                     ->schema([
-                        SpatieMediaLibraryFileUpload::make('blueprint')
+                        Forms\Components\FileUpload::make('blueprint')
                             //->optimize('webp')
                             ->directory('public/quarters')
                             ->multiple()
                             ->reorderable()
                             ->image()
-                            ->imageEditor()
                             ->label(__('quarter.form.blueprint.label')),
                     ]),
             ]);
@@ -141,7 +140,7 @@ class QuarterResource extends Resource
                 ->label(''),
             Grid::make()
                 ->schema([
-                    SpatieMediaLibraryImageEntry::make('blueprint')
+                    ViewImageGalleryEntry::make('blueprint')
                         ->label(__('quarter.view.blueprint'))
                         ->height('100%')
                         ->width('100%'),

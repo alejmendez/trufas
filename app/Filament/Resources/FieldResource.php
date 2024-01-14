@@ -14,8 +14,6 @@ use Filament\Infolists;
 use Filament\Infolists\Infolist;
 use Filament\Infolists\Components\Tabs;
 use Filament\Infolists\Components\Grid;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 
 use App\Infolists\Components\ViewImageGalleryEntry;
 
@@ -55,13 +53,12 @@ class FieldResource extends Resource
                     ->columns(2),
                 Forms\Components\Section::make(__('field.sections.blueprint'))
                     ->schema([
-                        SpatieMediaLibraryFileUpload::make('blueprint')
+                        Forms\Components\FileUpload::make('blueprint')
                             //->optimize('webp')
                             ->directory('public/fields')
                             ->multiple()
                             ->reorderable()
                             ->image()
-                            ->imageEditor()
                             ->label(__('field.form.blueprint.label'))
                     ]),
             ]);

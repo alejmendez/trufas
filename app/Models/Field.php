@@ -20,6 +20,10 @@ class Field extends Model implements HasMedia
         'blueprint',
     ];
 
+    protected $casts = [
+        'blueprint' => 'array',
+    ];
+
     public function quarters(): HasMany
     {
         return $this->hasMany(Quarter::class);

@@ -14,11 +14,11 @@ use Filament\Infolists;
 use Filament\Infolists\Infolist;
 use Filament\Infolists\Components\Tabs;
 use Filament\Infolists\Components\Grid;
+
+use App\Infolists\Components\ViewImageGalleryEntry;
+
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 
 class PlantResource extends Resource
 {
@@ -70,13 +70,12 @@ class PlantResource extends Resource
                     ->columns(2),
                 Forms\Components\Section::make(__('plant.sections.blueprint'))
                     ->schema([
-                        SpatieMediaLibraryFileUpload::make('blueprint')
+                        Forms\Components\FileUpload::make('blueprint')
                             //->optimize('webp')
                             ->directory('public/plants')
                             ->multiple()
                             ->reorderable()
                             ->image()
-                            ->imageEditor()
                             ->label(__('plant.form.blueprint.label')),
                     ]),
             ]);
@@ -164,7 +163,7 @@ class PlantResource extends Resource
                 ->label(''),
             Grid::make()
                 ->schema([
-                    SpatieMediaLibraryImageEntry::make('documents')
+                    ViewImageGalleryEntry::make('documents')
                         ->label(__('plant.view.documents'))
                         ->height('100%')
                         ->width('100%'),
