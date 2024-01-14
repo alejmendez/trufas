@@ -6,10 +6,11 @@ use App\Filament\Resources\FieldResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use App\Filament\Traits\RedirectToIndex;
+use App\Filament\Traits\PageRecordActions;
 
 class EditField extends EditRecord
 {
-    use RedirectToIndex;
+    use RedirectToIndex, PageRecordActions;
 
     protected static string $resource = FieldResource::class;
 

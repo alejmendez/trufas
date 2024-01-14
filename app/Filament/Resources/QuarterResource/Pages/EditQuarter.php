@@ -6,10 +6,11 @@ use App\Filament\Resources\QuarterResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use App\Filament\Traits\RedirectToIndex;
+use App\Filament\Traits\PageRecordActions;
 
 class EditQuarter extends EditRecord
 {
-    use RedirectToIndex;
+    use RedirectToIndex, PageRecordActions;
 
     protected static string $resource = QuarterResource::class;
 

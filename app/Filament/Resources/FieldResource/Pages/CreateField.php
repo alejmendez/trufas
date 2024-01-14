@@ -3,13 +3,13 @@
 namespace App\Filament\Resources\FieldResource\Pages;
 
 use App\Filament\Resources\FieldResource;
-use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use App\Filament\Traits\RedirectToIndex;
+use App\Filament\Traits\PageRecordActions;
 
 class CreateField extends CreateRecord
 {
-    use RedirectToIndex;
+    use RedirectToIndex, PageRecordActions;
 
     protected static string $resource = FieldResource::class;
 }

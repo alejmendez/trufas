@@ -6,11 +6,11 @@ use App\Filament\Resources\PlantResource;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use App\Filament\Traits\RedirectToIndex;
-
+use App\Filament\Traits\PageRecordActions;
 
 class CreatePlant extends CreateRecord
 {
-    use RedirectToIndex;
+    use RedirectToIndex, PageRecordActions;
 
     protected static string $resource = PlantResource::class;
 }

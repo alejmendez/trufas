@@ -7,10 +7,11 @@ use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Support\Str;
 use App\Filament\Traits\RedirectToIndex;
+use App\Filament\Traits\PageRecordActions;
 
 class CreateUser extends CreateRecord
 {
-    use RedirectToIndex;
+    use RedirectToIndex, PageRecordActions;
 
     protected static string $resource = UserResource::class;
 
