@@ -50,7 +50,7 @@
                     {{-- @deprecated Use `panels::sidebar.expand-button.rtl` instead of `panels::sidebar.expand-button` for RTL. --}}
                     :icon-alias="$isRtl ? ['panels::sidebar.expand-button.rtl', 'panels::sidebar.expand-button'] : 'panels::sidebar.expand-button'"
                     icon-size="lg"
-                    class="border border-gray-600 rounded"
+                    class="border border-gray-400 rounded"
                     :label="__('filament-panels::layout.actions.sidebar.expand.label')"
                     x-cloak
                     x-data="{}"
@@ -71,7 +71,7 @@
                     x-data="{}"
                     x-on:click="$store.sidebar.close()"
                     x-show="$store.sidebar.isOpen"
-                    class="border border-gray-600 rounded hidden lg:flex"
+                    class="border border-gray-400 rounded hidden lg:flex"
                 />
             @endif
 
