@@ -46,7 +46,7 @@
             <div class="w-full mb-5">
                 <img
                     src="{{ filled($limitedState[0]) ? $getImageUrl($limitedState[0]) : $defaultImageUrl }}"
-                    class="main-img h-auto max-w-full rounded-lg"
+                    class="main-img h-auto w-full rounded"
                 />
             </div>
         @endif
@@ -72,7 +72,7 @@
                             {{
                                 $getExtraImgAttributeBag()
                                     ->class([
-                                        'max-w-none object-cover object-center rounded-lg',
+                                        'gallery-list-element border-2 max-w-none object-cover object-center rounded',
                                         'rounded-full' => $isCircular,
                                         $ringClasses,
                                     ])

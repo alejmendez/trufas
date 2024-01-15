@@ -29,6 +29,9 @@ $(function() {
             }
         );
         mainImg.attr('src', src);
+
+        $('.gallery-list-element', this).removeClass('border-gray-400').addClass('border-transparent');
+        target.removeClass('border-transparent').addClass('border-gray-400');
     });
 
     inputTelMask.mask('input[data-type="tel"]');
