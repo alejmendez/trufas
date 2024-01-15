@@ -46,7 +46,7 @@
             <div class="w-full mb-5">
                 <img
                     src="{{ filled($limitedState[0]) ? $getImageUrl($limitedState[0]) : $defaultImageUrl }}"
-                    class="main-img"
+                    class="main-img h-auto max-w-full rounded-lg"
                 />
             </div>
         @endif
@@ -56,26 +56,14 @@
                 $attributes
                     ->merge($getExtraAttributes(), escape: false)
                     ->class([
-                        'fi-in-image flex items-center gap-x-2.5',
+                        'fi-in-image flex gap-x-2.5',
                     ])
             }}
         >
             @if (count($limitedState))
                 <div
                     @class([
-                        'flex',
-                        match ($overlap) {
-                            0 => null,
-                            1 => '-space-x-1',
-                            2 => '-space-x-2',
-                            3 => '-space-x-3',
-                            4 => '-space-x-4',
-                            5 => '-space-x-5',
-                            6 => '-space-x-6',
-                            7 => '-space-x-7',
-                            8 => '-space-x-8',
-                            default => 'gap-x-1.5',
-                        },
+                        'flex flex-wrap flex-row justify-center gap-4'
                     ])
                 >
                     @foreach ($limitedState as $stateItem)
@@ -84,7 +72,7 @@
                             {{
                                 $getExtraImgAttributeBag()
                                     ->class([
-                                        'max-w-none object-cover object-center',
+                                        'max-w-none object-cover object-center rounded-lg',
                                         'rounded-full' => $isCircular,
                                         $ringClasses,
                                     ])
